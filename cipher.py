@@ -20,7 +20,7 @@ def rail_fence_encrypt(data, rails):
 def rail_fence_decrypt(data, rails):
     n = len(data)
 
-    # Step 1: Build the zig-zag pattern (which rail each index belongs to)
+    # Build the zig-zag pattern (which rail each index belongs to)
     pattern = []
     rail = 0
     direction = 1
@@ -30,17 +30,17 @@ def rail_fence_decrypt(data, rails):
         if rail == 0 or rail == rails - 1:
             direction *= -1
 
-    # Step 2: Count how many elements go into each rail
+    # Count how many elements go into each rail
     rail_counts = [pattern.count(r) for r in range(rails)]
 
-    # Step 3: Slice the encrypted data into separate rails
+    # Slice the encrypted data into separate rails
     rails_data = []
     idx = 0
     for count in rail_counts:
         rails_data.append(data[idx:idx + count])
         idx += count
 
-    # Step 4: Reconstruct original order using the zig-zag pattern
+    # Reconstruct original order using the zig-zag pattern
     rail_indices = [0] * rails  # Track current index for each rail
     decrypted = []
 
